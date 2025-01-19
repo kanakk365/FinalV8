@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const corsOptions = {
-  origin: "https://finalv8.onrender.com",
+  origin: "https://final-v8.vercel.app/",
   credentials: true,
 };
 app.use(cors(corsOptions));
