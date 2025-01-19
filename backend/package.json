@@ -12,6 +12,6 @@
   "scripts": {
   "start": "node index.js",
   "dev": "nodemon index.js",
-  "build": "npm install"
+  "build": "echo 'No build step required for this project'"
 }
 }
