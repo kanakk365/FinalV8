@@ -132,7 +132,7 @@ function Hero() {
           {/* {youtubeData?.map((item)=>(
             <p>{item}</p>
           ))} */}
-          {youtubeData}
+          
         </div>
 
         <div className="w-max rounded-md bg-slate-50 h-3"></div>
