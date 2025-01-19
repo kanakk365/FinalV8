@@ -14,10 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const corsOptions = {
-  origin: "https://final-v8.vercel.app/",
-  credentials: true,
-};
+app.use(cors());
 app.use(cors(corsOptions));
 
 const PORT = 3000;
