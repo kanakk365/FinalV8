@@ -106,9 +106,9 @@ function Hero() {
         />
         <ShinyButton onClick={handleSubmit}>Analyse</ShinyButton>
         <ShinyButton onClick={handleSubmitTagline}>Tagline</ShinyButton>
-        <ShinyButton onClick={handleSubmitKeywords}> Keywords</ShinyButton>
+        <ShinyButton onClick={handleSubmitKeywords}> Fetch </ShinyButton>
         <ShinyButton onClick={handleSubmitYoutubeData}>
-          Insites
+          Insights
         </ShinyButton>
         
       </div>
@@ -121,13 +121,13 @@ function Hero() {
           ))}
         </div>
         <div className="flex p-5">
-          <h1 className="text-2xl">Your Tagline : </h1>
+          <h1 className="text-2xl">Your Potential Taglines : </h1>
           {tag?.map((msg) => (
             <Badge className={"text-xl mx-2"}>{msg}</Badge>
           ))}
         </div>
-        <div className="p-8">
-          Insites: 
+        <div className="p-8 text-3xl">
+          Insights: 
           {youtubeData}
           {/* {youtubeData?.map((item)=>(
             <p>{item}</p>
