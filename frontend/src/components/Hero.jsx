@@ -126,7 +126,7 @@ function Hero() {
             <Badge className={"text-xl mx-2"}>{msg}</Badge>
           ))}
         </div>
-        <div className="p-8 text-3xl">
+        <div className="p-7 text-2xl">
           Insights: 
           {youtubeData}
           {/* {youtubeData?.map((item)=>(
