@@ -68,8 +68,8 @@ function Hero() {
     const res = await axios.post("http://localhost:3000/api/v1/youtube/ai", {
       data: keywords,
     });
-    console.log(res.data);
-    setYoutubeData(res.data);
+    const info = JSON.stringify(res.data);
+    setYoutubeData(info);
   };
 
   const handleSubmitRedditData = async () => {};
@@ -105,14 +105,12 @@ function Hero() {
           placeholder="Enter topics"
         />
         <ShinyButton onClick={handleSubmit}>Analyse</ShinyButton>
-        <ShinyButton onClick={handleSubmitTagline}>Get Tagline</ShinyButton>
-        <ShinyButton onClick={handleSubmitKeywords}>Get Keywords</ShinyButton>
+        <ShinyButton onClick={handleSubmitTagline}>Tagline</ShinyButton>
+        <ShinyButton onClick={handleSubmitKeywords}> Keywords</ShinyButton>
         <ShinyButton onClick={handleSubmitYoutubeData}>
-          Get Youtube Data
+          Insites
         </ShinyButton>
-        <ShinyButton onClick={handleSubmitRedditData}>
-          Get Reddit Data
-        </ShinyButton>
+        
       </div>
       <div className="ans">
         <hr />
@@ -128,10 +126,13 @@ function Hero() {
             <Badge className={"text-xl mx-2"}>{msg}</Badge>
           ))}
         </div>
-        <div>
-          {youtubeData?.map((item)=>(
+        <div className="p-8">
+          Insites: 
+          {youtubeData}
+          {/* {youtubeData?.map((item)=>(
             <p>{item}</p>
-          ))}
+          ))} */}
+          {youtubeData}
         </div>
 
         <div className="w-max rounded-md bg-slate-50 h-3"></div>
