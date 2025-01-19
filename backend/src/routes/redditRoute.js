@@ -1,8 +1,8 @@
 import express from "express";
 
-const youtubeDataRoute = express.Router();
+const redditRouter = express.Router();
 
-youtubeDataRoute.post("/ai", async (req, res) => {
+redditRouter.post("/ai", async (req, res) => {
   console.log("i");
   const { data } = req.body;
 
@@ -12,11 +12,11 @@ youtubeDataRoute.post("/ai", async (req, res) => {
 
   async function initiateComRun(value) {
     const url =
-      "https://api.langflow.astra.datastax.com/lf/2a2d7b01-2bf3-4dd5-82d1-501aa29b152e/api/v1/run/cb953ab2-a2a5-489c-ae7c-552d877043f5?stream=false";
+      "https://api.langflow.astra.datastax.com/lf/bbcbdfcc-0418-4a40-b0b9-22e474561e53/api/v1/run/28c884c6-c63f-48b2-b915-e42840ebde1b?stream=false";
 
     const headers = {
       "Content-Type": "application/json",
-      Authorization: `Bearer AstraCS:mlsYaIeZlPyZqgtIgcITArUO:a20c507a4bf4e07b32ea7bae3ba420e31e4f02a0f7e5d06ef6aeade4025119d2`,
+      Authorization: `Bearer AstraCS:pQWKaQcNZKtlekrwNAqIdWgY:9b5b704463fe3cc23469deb83c04354bf388d02ac9700ffb5f38ac790a3625d5`,
     };
 
     const body = {
@@ -63,10 +63,8 @@ youtubeDataRoute.post("/ai", async (req, res) => {
   try {
     const finalData = JSON.stringify(data);
     const result = await initiateComRun(finalData);
-    console.log(typeof(result));
-   
-    
-    console.log(result)
+
+    console.log("Result" + result);
 
     if (!result) {
       return res
@@ -75,7 +73,7 @@ youtubeDataRoute.post("/ai", async (req, res) => {
     }
 
     let message = {
-      youtubeData: result,
+      competitors: result,
     };
 
     return res.status(200).json(message);
@@ -87,4 +85,4 @@ youtubeDataRoute.post("/ai", async (req, res) => {
   }
 });
 
-export default youtubeDataRoute;
+export default redditRouter;

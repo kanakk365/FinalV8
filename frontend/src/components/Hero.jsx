@@ -3,14 +3,16 @@ import { Input } from "./ui/input";
 import { ShinyButton } from "./ui/shiny-button";
 import axios from "axios";
 import { Badge } from "./ui/badge";
+import { MessageSquare } from "lucide-react";
 
 function Hero() {
   const [topic, setTopic] = React.useState("");
   const [tag, setTag] = React.useState([]);
   const [competitors, setCompetitors] = React.useState([]);
   const [keywords, setKeywords] = React.useState([]);
+  const [youtubeData, setYoutubeData] = React.useState([]);
 
-
+    
   const handleTopicChange = async (e) => {
     setTopic(e.target.value);
   };
@@ -20,16 +22,15 @@ function Hero() {
       const res = await axios.post("http://localhost:3000/api/v1/search/ai", {
         data: topic,
       });
-      
-      
+
       let comStr = res.data.competitors;
-      let comArray = comStr.split(",").map((item) => item.replace(/"/g, "").trim());
+      let comArray = comStr
+        .split(",")
+        .map((item) => item.replace(/"/g, "").trim());
 
       setCompetitors(comArray);
-      
-        
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   };
 
@@ -38,34 +39,61 @@ function Hero() {
       const res = await axios.post("http://localhost:3000/api/v1/tagline/ai", {
         data: topic,
       });
-      
+
       let tagStr = res.data.tagline;
-      let tagArray = tagStr.split(",").map((item) => item.replace(/"/g, "").trim());
+      let tagArray = tagStr
+        .split(",")
+        .map((item) => item.replace(/"/g, "").trim());
 
       setTag(tagArray);
-      
-        
     } catch (error) {
-        console.log(error);
-  }
-}
+      console.log(error);
+    }
+  };
 
-const handleSubmitKeywords = async () => {
-try {
-    const res2 = await axios.post("http://localhost:3000/api/v1/keyword/ai",{data: topic});
-    let keyStr = await res2.data.youtubeScrapper
-   
-    setKeywords(keyStr);
+  const handleSubmitKeywords = async () => {
+    try {
+      const res2 = await axios.post("http://localhost:3000/api/v1/keyword/ai", {
+        data: topic,
+      });
+      let keyStr = await res2.data.youtubeScrapper;
 
-} catch (error) {
-    console.log(error);
-}
-}
+      setKeywords(keyStr);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-const handleSubmitYoutubeData = async () => {
-  const res = await axios.post("http://localhost:3000/api/v1/youtube/ai",{data: keywords});
-  console.log(res.data);
-}
+  const handleSubmitYoutubeData = async () => {
+    const res = await axios.post("http://localhost:3000/api/v1/youtube/ai", {
+      data: keywords,
+    });
+    console.log(res.data);
+    setYoutubeData(res.data);
+  };
+
+  const handleSubmitRedditData = async () => {};
+  const Insight = ({ text, children, index = 0 }) => {
+    const colors = [
+      "bg-amber-50",
+      "bg-rose-50",
+      "bg-emerald-50",
+      "bg-blue-50",
+      "bg-purple-50",
+    ];
+
+    return (
+      <div
+        className={`${colors[index]} rounded-xl p-4 transition-all duration-300 hover:shadow-md`}
+      >
+        <div className="flex items-start gap-4">
+          <div className="p-2 bg-white rounded-lg shadow-sm">{children}</div>
+          <p className="text-gray-700 flex-1 pt-1.5">{text}</p>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div>
       <div className="flex flex-row items-center justify-between mt-5 gap-5 p-5 max-w-6xl ">
@@ -79,20 +107,30 @@ const handleSubmitYoutubeData = async () => {
         <ShinyButton onClick={handleSubmit}>Analyse</ShinyButton>
         <ShinyButton onClick={handleSubmitTagline}>Get Tagline</ShinyButton>
         <ShinyButton onClick={handleSubmitKeywords}>Get Keywords</ShinyButton>
-        <ShinyButton onClick={handleSubmitYoutubeData}>Get Youtube Data</ShinyButton>
+        <ShinyButton onClick={handleSubmitYoutubeData}>
+          Get Youtube Data
+        </ShinyButton>
+        <ShinyButton onClick={handleSubmitRedditData}>
+          Get Reddit Data
+        </ShinyButton>
       </div>
       <div className="ans">
         <hr />
         <div className="flex p-5">
           <h1 className="text-2xl">Your Top Competitors : </h1>
           {competitors?.map((msg) => (
-            <Badge className={"text-xl mx-2"} >{msg}</Badge>
+            <Badge className={"text-xl mx-2"}>{msg}</Badge>
           ))}
         </div>
         <div className="flex p-5">
           <h1 className="text-2xl">Your Tagline : </h1>
           {tag?.map((msg) => (
-            <Badge className={"text-xl mx-2"} >{msg}</Badge>
+            <Badge className={"text-xl mx-2"}>{msg}</Badge>
+          ))}
+        </div>
+        <div>
+          {youtubeData?.map((item)=>(
+            <p>{item}</p>
           ))}
         </div>
 
