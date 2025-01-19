@@ -19,7 +19,7 @@ function Hero() {
 
   const handleSubmit = async () => {
     try {
-      const res = await axios.post("http://localhost:3000/api/v1/search/ai", {
+      const res = await axios.post("https://finalv8.onrender.com/api/v1/search/ai", {
         data: topic,
       });
 
@@ -36,7 +36,7 @@ function Hero() {
 
   const handleSubmitTagline = async () => {
     try {
-      const res = await axios.post("http://localhost:3000/api/v1/tagline/ai", {
+      const res = await axios.post("https://finalv8.onrender.com/api/v1/tagline/ai", {
         data: topic,
       });
 
@@ -53,7 +53,7 @@ function Hero() {
 
   const handleSubmitKeywords = async () => {
     try {
-      const res2 = await axios.post("http://localhost:3000/api/v1/keyword/ai", {
+      const res2 = await axios.post("https://finalv8.onrender.com/api/v1/keyword/ai", {
         data: topic,
       });
       let keyStr = await res2.data.youtubeScrapper;
@@ -65,7 +65,7 @@ function Hero() {
   };
 
   const handleSubmitYoutubeData = async () => {
-    const res = await axios.post("http://localhost:3000/api/v1/youtube/ai", {
+    const res = await axios.post("https://finalv8.onrender.com/api/v1/youtube/ai", {
       data: keywords,
     });
     const info = JSON.stringify(res.data);
