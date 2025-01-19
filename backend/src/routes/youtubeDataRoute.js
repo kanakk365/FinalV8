@@ -62,11 +62,16 @@ youtubeDataRoute.post("/ai", async (req, res) => {
 
   try {
     const finalData = JSON.stringify(data);
+   
     const result = await initiateComRun(finalData);
+    
     console.log(typeof(result));
+    console.log(result);
+
+
    
     
-    console.log(result)
+    console.log(result.obj)
 
     if (!result) {
       return res
